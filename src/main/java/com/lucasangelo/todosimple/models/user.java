@@ -16,6 +16,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "User.TABLE_NAME")
@@ -56,6 +58,7 @@ public class User {
         this.password = password;
     }
 
+
     public Long getId() {
         return this.id;
     }
@@ -80,20 +83,15 @@ public class User {
         this.password = password;
     }
 
-    public User id(Long id) {
-        setId(id);
-        return this;
+    @JsonIgnore
+    public List<Task> getTasks() {
+        return this.tasks;
     }
 
-    public User username(String username) {
-        setUsername(username);
-        return this;
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
-    public User password(String password) {
-        setPassword(password);
-        return this;
-    }
 
     @Override
     public boolean equals(Object obj) {
